@@ -1,5 +1,7 @@
 package com.mustache.bbs.domain.dto;
 
+import com.mustache.bbs.domain.entity.Article;
+
 public class ArticleDto {
 
     private Long id;
@@ -15,5 +17,9 @@ public class ArticleDto {
     public String toString(){
         return "ArticleDto{"+
                 "title='"+title+'\''+",content="+content+'\''+'}';
+    }
+
+    public Article toEntity(){
+        return new Article(title, content);
     }
 }
