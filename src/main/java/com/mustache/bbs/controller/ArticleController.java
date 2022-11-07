@@ -2,6 +2,7 @@ package com.mustache.bbs.controller;
 
 import com.mustache.bbs.domain.dto.ArticleDto;
 import com.mustache.bbs.domain.entity.Article;
+import com.mustache.bbs.repository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class ArticleController {
 
+    private final ArticleRepository articleRepository;
+
+    public ArticleController(ArticleRepository articleRepository){
+        this.articleRepository = articleRepository;
+    }
 
     @GetMapping(value = "/new")
     public String newArticleForm(){
@@ -24,6 +30,7 @@ public class ArticleController {
     public String createArticle(ArticleDto form){
         log.info(form.toString());
         Article article = form.toEntity();
+        articleRepository.save(article);
         return "";
     }
 }
